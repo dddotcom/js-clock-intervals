@@ -12,9 +12,9 @@ document.addEventListener("DOMContentLoaded", function() {
   // get current time and update variables
   var now = new Date();
   var hourCounter = now.getHours()%12; // returns number between 0 and 23
-  minuteCounter = now.getMinutes(); // returns number between 0 and 59
-  secondCounter = now.getSeconds(); // returns number between 0 and 59
-  console.log(hourCounter + ":" + minuteCounter + ":" + secondCounter);
+  var minuteCounter = now.getMinutes(); // returns number between 0 and 59
+  var secondCounter = now.getSeconds(); // returns number between 0 and 59
+  // console.log(hourCounter + ":" + minuteCounter + ":" + secondCounter);
 
   // move seconds
   var oneSecondInterval = setInterval(moveSecondHand, oneSecond);
@@ -36,46 +36,61 @@ document.addEventListener("DOMContentLoaded", function() {
   }, hourTimeoutDelay)
 
   // set the clock
-  moveSecondHand();
-  moveMinuteHand();
-  moveHourHand();
+  drawClock();
+
+  function drawClock(){
+    var secondHandDegrees = (secondCounter/60)*360;
+    secondHand.style.transform = "rotate(" + secondHandDegrees + "deg)";
+
+    var minuteHandDegrees = (minuteCounter/60)*360;
+    minuteHand.style.transform = "rotate(" + minuteHandDegrees + "deg)";
+
+    var hourHandDegrees = (hourCounter/12)*360;
+    hourHand.style.transform = "rotate(" + hourHandDegrees + "deg)";
+  }
 
   // move hand functions
   function moveSecondHand() {
-    // calculate degrees to rotate
-    secondHandDegrees = (secondCounter/60)*360;
-    secondHand.style.transform = "rotate(" + secondHandDegrees + "deg)";
     if(secondCounter <59){
       secondCounter++;
     } else { // else reset secondCounter to 0
       secondCounter = 0;
     }
+
+    console.log(hourCounter + ":" + minuteCounter + ":" + secondCounter);
+    // calculate degrees to rotate
+    var secondHandDegrees = (secondCounter/60)*360;
+    secondHand.style.transform = "rotate(" + secondHandDegrees + "deg)";
+
   }
 
   function moveMinuteHand() {
-    // calculate degrees to rotate
-    minuteHandDegrees = (minuteCounter/60)*360;
-    minuteHand.style.transform = "rotate(" + minuteHandDegrees + "deg)";
-
     // increment minuteCounter if it is <59
     if(minuteCounter < 59){
       minuteCounter++;
     } else { // else reset minuteCounter to 0
       minuteCounter = 0;
     }
+
+    // calculate degrees to rotate
+    var minuteHandDegrees = (minuteCounter/60)*360;
+    minuteHand.style.transform = "rotate(" + minuteHandDegrees + "deg)";
+
   }
 
   function moveHourHand() {
-    // calculate degrees to rotate
-    hourHandDegrees = (hourCounter/12)*360;
-    hourHand.style.transform = "rotate(" + hourHandDegrees + "deg)";
-
     // increment hourCounter if it is <11
     if(hourCounter < 11){
       hourCounter++;
     } else { // else reset hourCounter to 0
       hourCounter = 0;
     }
+
+    // calculate degrees to rotate
+    var hourHandDegrees = (hourCounter/12)*360;
+    hourHand.style.transform = "rotate(" + hourHandDegrees + "deg)";
+
+
   }
 
 });
