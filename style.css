@@ -5,10 +5,22 @@
 }
 
 #hour {
+  transform: rotate(0deg);
+  position: absolute;
+  left: 10px;
+  bottom: 115px;
 }
 
 #minute {
+  transform: rotate(0deg);
+  position: absolute;
+  left: 10px;
+  bottom: 115px;
 }
 
 #second {
+  transform: rotate(0deg);
+  position: absolute;
+  left: 10px;
+  bottom: 115px;
 }
